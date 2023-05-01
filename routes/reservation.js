@@ -7,6 +7,7 @@ const router = require("express").Router();
 //CREATE
 router.get("/info", async (req, res) => {
   try {
+     await Reservation.deleteMany( { date: { $lt: new Date() } })
     const infoRes = await Info.find({});
     const tableRes = await Table.find({});
     const reservations = await Reservation.aggregate([
